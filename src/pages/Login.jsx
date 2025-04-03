@@ -1,11 +1,17 @@
+import { useContext } from "react";
+import { AuthContext } from "../providers/AuthProvider";
 
 const Login = () => {
+    const {userLogin} = useContext(AuthContext);
     const handleLogin = (e) => {
         e.preventDefault();
         const form = new FormData(e.currentTarget);
         const userEmail = form.get('email');
         const userPassword = form.get('password');
-        console.log(userEmail, userPassword)
+        console.log(userEmail, userPassword);
+
+        // login with email and password
+        userLogin(userEmail, userPassword);
     }
     return (
         <div className="hero bg-base-200 min-h-screen">
