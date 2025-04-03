@@ -1,8 +1,12 @@
 import { useContext } from "react";
 import { AuthContext } from "../providers/AuthProvider";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Login = () => {
     const {userLogin, facebookLogin} = useContext(AuthContext);
+    const location = useLocation();
+    const navigate = useNavigate();
+    console.log('location on login page: ', location);
     const handleLogin = (e) => {
         e.preventDefault();
         const form = new FormData(e.currentTarget);
@@ -11,17 +15,30 @@ const Login = () => {
         console.log(userEmail, userPassword);
 
         // login with email and password
-        userLogin(userEmail, userPassword);
+        userLogin(userEmail, userPassword)
+        .then(result => {
+          console.log(result.user);
+          // navigate to state or homepage
+          navigate(location?.state ? location.state : '/');
+        })
+        .catch(error => {
+          console.error(error);
+        })
+        
+
     };
     const handleFacebookLogin = () => {
         facebookLogin()
         .then(result => {
             console.log(result.user);
+            // navigate to state or homepage
+          navigate(location?.state ? location.state : '/');
         })
         .catch(error => {
             console.error(error);
         })
     }
+
     return (
         <div className="hero bg-base-200 min-h-screen">
             <div className="hero-content flex-col ">

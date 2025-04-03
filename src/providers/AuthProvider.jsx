@@ -21,13 +21,8 @@ const AuthProvider = ({children}) => {
         })
     }
     const userLogin = (email, password) => {
-        signInWithEmailAndPassword(auth, email, password)
-        .then(result => {
-            console.log(result.user);
-        })
-        .catch(error => {
-            console.error(error);
-        })
+        return signInWithEmailAndPassword(auth, email, password)
+        
     }
     const facebookLogin = () => {
         return signInWithPopup(auth, facebookProvider);
