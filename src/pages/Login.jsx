@@ -1,9 +1,9 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const Login = () => {
-    const {userLogin, facebookLogin} = useContext(AuthContext);
+    const {user, userLogin, facebookLogin} = useContext(AuthContext);
     const location = useLocation();
     const navigate = useNavigate();
     console.log('location on login page: ', location);
@@ -19,7 +19,7 @@ const Login = () => {
         .then(result => {
           console.log(result.user);
           // navigate to state or homepage
-          navigate(location?.state ? location.state : '/');
+        //   navigate(location?.state ? location.state : '/');
         })
         .catch(error => {
           console.error(error);
@@ -32,12 +32,19 @@ const Login = () => {
         .then(result => {
             console.log(result.user);
             // navigate to state or homepage
-          navigate(location?.state ? location.state : '/');
+        //   navigate(location?.state ? location.state : '/');
         })
         .catch(error => {
             console.error(error);
         })
     }
+
+    useEffect( () => {
+        if (user) {
+            navigate(location?.state ? location.state : '/');
+        }
+        // 
+    } ,[user])
 
     return (
         <div className="hero bg-base-200 min-h-screen">
