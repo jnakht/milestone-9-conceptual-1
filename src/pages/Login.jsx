@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 
 const Login = () => {
-    const {userLogin} = useContext(AuthContext);
+    const {userLogin, facebookLogin} = useContext(AuthContext);
     const handleLogin = (e) => {
         e.preventDefault();
         const form = new FormData(e.currentTarget);
@@ -12,6 +12,15 @@ const Login = () => {
 
         // login with email and password
         userLogin(userEmail, userPassword);
+    };
+    const handleFacebookLogin = () => {
+        facebookLogin()
+        .then(result => {
+            console.log(result.user);
+        })
+        .catch(error => {
+            console.error(error);
+        })
     }
     return (
         <div className="hero bg-base-200 min-h-screen">
@@ -37,6 +46,7 @@ const Login = () => {
                             </fieldset>
                         </div>
                     </form>
+                    <button onClick={handleFacebookLogin} className="btn btn-neutral mt-4">Facebook Login</button>
                 </div>
             </div>
         </div>
