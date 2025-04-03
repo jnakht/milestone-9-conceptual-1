@@ -1,6 +1,6 @@
-import { createContext } from "react";
+import { createContext, useEffect } from "react";
 import { useState } from "react";
-import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import app from "../firebase/firebase.config";
 import { FacebookAuthProvider } from "firebase/auth";
 
@@ -9,7 +9,7 @@ const auth = getAuth(app);
 
 const AuthProvider = ({children}) => {
     const [user, setUser] = useState(null);
-    const facebookProvider = new facebookProvider();
+    const facebookProvider = new FacebookAuthProvider();
     const createUser = (email, password) => {
         createUserWithEmailAndPassword(auth, email, password)
         .then(result => {
@@ -31,6 +31,11 @@ const AuthProvider = ({children}) => {
     const facebookLogin = () => {
         return signInWithPopup(auth, facebookProvider);
     }
+    useEffect( () => {
+        onAuthStateChanged(auth, currentUser => {
+            setUser(currentUser);
+        })
+    } ,[])
     const authInfo = {
         user,
         createUser,
