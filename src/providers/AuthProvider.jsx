@@ -9,6 +9,7 @@ const auth = getAuth(app);
 
 const AuthProvider = ({children}) => {
     const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true);
     const facebookProvider = new FacebookAuthProvider();
     const createUser = (email, password) => {
         createUserWithEmailAndPassword(auth, email, password)
@@ -35,9 +36,11 @@ const AuthProvider = ({children}) => {
         return signOut(auth);
     }
     useEffect( () => {
-        onAuthStateChanged(auth, currentUser => {
+        const unSubscribe = onAuthStateChanged(auth, currentUser => {
             setUser(currentUser);
-        })
+            setLoading(false);
+        });
+        return () => unSubscribe();
     } ,[])
     const authInfo = {
         user,
@@ -45,6 +48,7 @@ const AuthProvider = ({children}) => {
         userLogin,
         facebookLogin,
         userLogOut,
+        loading,
     };
     return (
         <AuthContext.Provider value={authInfo}>
