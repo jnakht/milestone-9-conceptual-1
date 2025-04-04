@@ -1,7 +1,10 @@
 
+import { useContext } from "react";
 import { useForm } from "react-hook-form"
+import { AuthContext } from "../providers/AuthProvider";
 
 const RegisterRecap = () => {
+    const {createUser} = useContext(AuthContext);
     const {
         register,
         handleSubmit,
@@ -11,7 +14,15 @@ const RegisterRecap = () => {
 
     const onSubmit = (data) => {
         console.log('this is register recap');
-        console.log('this is the data',data)
+        console.log('this is the data',data);
+        // create user with email and password
+        createUser(data.email, data.password)
+        .then(result => {
+            console.log(result.user);
+        })
+        .catch(error => {
+            console.error(error);
+        })
     }
 
     // console.log('this is the fullName: ', watch("fullName")) // watch input value by passing the name of it

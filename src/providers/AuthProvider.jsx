@@ -12,13 +12,7 @@ const AuthProvider = ({children}) => {
     const [loading, setLoading] = useState(true);
     const facebookProvider = new FacebookAuthProvider();
     const createUser = (email, password) => {
-        createUserWithEmailAndPassword(auth, email, password)
-        .then(result => {
-            console.log(result.user);
-        })
-        .catch(error => {
-            console.error(error);
-        })
+        createUserWithEmailAndPassword(auth, email, password);
     }
     const userLogin = (email, password) => {
         return signInWithEmailAndPassword(auth, email, password)

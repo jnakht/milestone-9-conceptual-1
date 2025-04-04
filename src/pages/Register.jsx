@@ -14,7 +14,13 @@ const Register = () => {
         console.log(userName, userPhoto, userEmail, userPassword, userConfirmPassword);
 
         // create user with email and password
-        createUser(userEmail, userPassword);
+        createUser(userEmail, userPassword)
+        .then(result => {
+            console.log(result.user);
+        })
+        .catch(error => {
+            console.error(error);
+        })
     }
     return (
         <div className="hero bg-base-200 min-h-screen">
