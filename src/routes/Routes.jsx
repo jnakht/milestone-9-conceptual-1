@@ -8,6 +8,7 @@ import Login from "../pages/Login";
 import PrivateRoute from "./PrivateRoute";
 import About from "../pages/About";
 import RegisterRecap from "../pages/RegisterRecap";
+import LoginRecap from "../pages/LoginRecap";
 
 const router = createBrowserRouter([
     {
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
             {
                 path: '/login',
                 element: <Login></Login>
+            },
+            {
+                path: '/loginRecap',
+                element: <LoginRecap></LoginRecap>
             },
             {
                 path: '/about',
