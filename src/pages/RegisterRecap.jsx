@@ -1,10 +1,10 @@
 
-import { useContext } from "react";
+
 import { useForm } from "react-hook-form"
-import { AuthContext } from "../providers/AuthProvider";
+import { authHook } from "../hooks/AuthHook";
 
 const RegisterRecap = () => {
-    const {createUser} = useContext(AuthContext);
+    const {createUser} = authHook();
     const {
         register,
         handleSubmit,

@@ -1,12 +1,10 @@
 
-
-import { useContext } from "react";
 import { useForm } from "react-hook-form"
-import { AuthContext } from "../providers/AuthProvider";
-
+import { authHook } from "../hooks/AuthHook";
 
 const LoginRecap = () => {
-    const { userLogin } = useContext(AuthContext);
+    // const { userLogin } = useContext(AuthContext);
+    const {userLogin} = authHook();
     const {
         register,
         handleSubmit,

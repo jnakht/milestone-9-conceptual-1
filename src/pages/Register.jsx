@@ -1,8 +1,8 @@
-import { useContext } from "react";
-import { AuthContext } from "../providers/AuthProvider";
+
+import { authHook } from "../hooks/AuthHook";
 
 const Register = () => {
-    const {createUser} = useContext(AuthContext);
+    const {createUser} = authHook();
     const handleRegister = (e) => {
         e.preventDefault();
         const form = new FormData(e.currentTarget);

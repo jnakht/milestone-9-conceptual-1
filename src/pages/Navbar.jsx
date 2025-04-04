@@ -1,9 +1,9 @@
-import { useContext } from "react";
+
 import { NavLink } from "react-router-dom";
-import { AuthContext } from "../providers/AuthProvider";
+import { authHook } from "../hooks/AuthHook";
 
 const Navbar = () => {
-    const {user, userLogOut} = useContext(AuthContext);
+    const {user, userLogOut} = authHook();
     console.log('user is now in navbar: ', user);
     const navLinks = <>
         <li><NavLink to='/'>Home</NavLink></li> 
